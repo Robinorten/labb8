@@ -29,6 +29,8 @@ public class GUITowerDefence extends JFrame {
 
     // Change this to try out different levels
     TowerDefenceLevel level = TowerDefenceLevel.buildDefaultLevel();
+    Monster Benny = new Monster();
+
 
     // Create the GUI and set it to be visible
     GUITowerDefence gui = new GUITowerDefence(level);
