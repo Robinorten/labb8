@@ -59,6 +59,11 @@ public class GUITowerDefence extends JFrame {
       for (int col = 0; col < levelWidth; col++) {
         JPanel positionPanel = new JPanel();
         positionPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        if(level.checkPassable(row,col)== true){
+          positionPanel.setBackground(Color.WHITE);
+        } else {
+          positionPanel.setBackground(Color.GREEN);
+        }
         mainPanel.add(positionPanel);
 
         // Add the panel to the 'positionPanels' map so we can access it
