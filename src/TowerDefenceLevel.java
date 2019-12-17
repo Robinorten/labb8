@@ -1,4 +1,7 @@
 public class TowerDefenceLevel {
+    private int height,width;
+    private Position currentPos;
+    private boolean[][] passable;
 
 
     // Create a new tower defence level with the following parameters:
@@ -13,19 +16,29 @@ public class TowerDefenceLevel {
     public TowerDefenceLevel(int height, int width, boolean[][] passable,
                              int startRow, int startCol,
                              int targetRow, int targetCol) {
-        // TODO
+        this.height = height;
+        this.width = width;
+        this.passable = passable;
     }
 
     public int getHeight() {
-        return 3; // TODO
+        return this.height;
     }
 
     public int getWidth() {
-        return 8; // TODO
+        return this.width;
     }
 
     public Position getPosition(int row, int col) {
-        return null; // TODO
+        Position currentPos = new Position(row,col);
+        return currentPos;
+    }
+    public boolean checkPassable(int row, int col){
+        if (this.passable[row][col] == true){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static TowerDefenceLevel buildSimpleLevel() {
