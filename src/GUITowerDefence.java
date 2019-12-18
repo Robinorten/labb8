@@ -59,7 +59,7 @@ public class GUITowerDefence extends JFrame {
       for (int col = 0; col < levelWidth; col++) {
         JPanel positionPanel = new JPanel();
         positionPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        if(level.checkPassable(row,col)== true){
+        if(level.checkPassable(row, col)){
           positionPanel.setBackground(Color.WHITE);
         } else {
           positionPanel.setBackground(Color.GREEN);
@@ -72,6 +72,8 @@ public class GUITowerDefence extends JFrame {
         positionPanels.put(position, positionPanel);
       }
     }
+
+
 
     // Start the timer and set it to call the event loop each second
     EventLoop loop = new EventLoop();
@@ -96,7 +98,6 @@ public class GUITowerDefence extends JFrame {
         setTitle("Game over!");
         timer.stop();
       }
-
       // These two commands are necessary to properly
       // display all the updated elements of the GUI.
       revalidate();
