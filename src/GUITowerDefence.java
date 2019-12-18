@@ -24,12 +24,12 @@ public class GUITowerDefence extends JFrame {
 
   // A representation of the complete game
   private TowerDefenceLevel level;
-  public Monster benny = new Monster(TowerDefenceLevel.buildDefaultLevel());
+  public Monster benny = new Monster(TowerDefenceLevel.buildGridLevel());
 
   public static void main(String[] args) {
 
     // Change this to try out different levels
-    TowerDefenceLevel level = TowerDefenceLevel.buildDefaultLevel();
+    TowerDefenceLevel level = TowerDefenceLevel.buildGridLevel();
 
 
 
