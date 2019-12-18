@@ -30,15 +30,10 @@ public class TowerDefenceLevel {
     }
 
     public Position getPosition(int row, int col) {
-        Position currentPos = new Position(row,col);
-        return currentPos;
+        return new Position(row,col);
     }
     public boolean checkPassable(int row, int col){
-        if (this.passable[row][col] == true){
-            return true;
-        } else {
-            return false;
-        }
+        return this.passable[row][col];
     }
 
     public static TowerDefenceLevel buildSimpleLevel() {
