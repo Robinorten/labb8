@@ -1,5 +1,5 @@
 public class TowerDefenceLevel {
-    private int height,width;
+    public int height,width,startRow,startCol,targetRow,targetCol;
     private Position currentPos;
     private boolean[][] passable;
 
@@ -19,6 +19,10 @@ public class TowerDefenceLevel {
         this.height = height;
         this.width = width;
         this.passable = passable;
+        this.startCol = startCol;
+        this.startRow = startRow;
+        this.targetCol = targetCol;
+        this.targetRow = targetRow;
     }
 
     public int getHeight() {

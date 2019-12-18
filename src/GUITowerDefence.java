@@ -24,12 +24,13 @@ public class GUITowerDefence extends JFrame {
 
   // A representation of the complete game
   private TowerDefenceLevel level;
+  public Monster benny = new Monster(TowerDefenceLevel.buildDefaultLevel());
 
   public static void main(String[] args) {
 
     // Change this to try out different levels
     TowerDefenceLevel level = TowerDefenceLevel.buildDefaultLevel();
-    Monster Benny = new Monster();
+
 
 
     // Create the GUI and set it to be visible
@@ -65,7 +66,6 @@ public class GUITowerDefence extends JFrame {
           positionPanel.setBackground(Color.GREEN);
         }
         mainPanel.add(positionPanel);
-
         // Add the panel to the 'positionPanels' map so we can access it
         // later (with positionPanels.get(position)).
         Position position = level.getPosition(row, col);
@@ -91,6 +91,9 @@ public class GUITowerDefence extends JFrame {
 
       // Here you can implement the logic to advance the game by one step
       // and update the GUI.
+      benny.move();
+      System.out.println(Integer.toString(benny.currentPos.row)+Integer.toString(benny.currentPos.col));
+
 
       boolean gameOver = false; // TODO
 
