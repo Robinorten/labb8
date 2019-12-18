@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
@@ -5,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.*;
+import javax.swing.ImageIcon;
 
 /**
  * Basic GUI for very basic "Tower Defence" game
@@ -28,7 +30,7 @@ public class GUITowerDefence extends JFrame {
   public static void main(String[] args) {
 
     // Change this to try out different levels
-    TowerDefenceLevel level = TowerDefenceLevel.buildDefaultLevel();
+    TowerDefenceLevel level = TowerDefenceLevel.buildAdvancedLevel();
     Monster Benny = new Monster();
 
 
@@ -37,6 +39,7 @@ public class GUITowerDefence extends JFrame {
     gui.setVisible(true);
 
   }
+
 
   public GUITowerDefence(TowerDefenceLevel level) {
 
@@ -54,7 +57,7 @@ public class GUITowerDefence extends JFrame {
     JPanel mainPanel = new JPanel();
     mainPanel.setLayout(new GridLayout(levelHeight, levelWidth));
     this.add(mainPanel);
-    //hejhej
+    //JButton myButton = new JButton("My Button");
     for (int row = 0; row < levelHeight; row++) {
       for (int col = 0; col < levelWidth; col++) {
         JPanel positionPanel = new JPanel();
@@ -62,9 +65,24 @@ public class GUITowerDefence extends JFrame {
         if(level.checkPassable(row, col)){
           positionPanel.setBackground(Color.WHITE);
         } else {
+          JButton myButton = new JButton();
           positionPanel.setBackground(Color.GREEN);
+          positionPanel.add(myButton);
+          myButton.setPreferredSize(new Dimension(100, 90));
+          myButton.setOpaque(false);
+          myButton.setContentAreaFilled(false);
+          myButton.setBorderPainted(false);
+          myButton.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            positionPanel.add(buildTowerLabel());
+            positionPanel.remove(myButton);
+
+          }
+          });
+
         }
         mainPanel.add(positionPanel);
+
 
         // Add the panel to the 'positionPanels' map so we can access it
         // later (with positionPanels.get(position)).
@@ -86,10 +104,13 @@ public class GUITowerDefence extends JFrame {
   // ---------- Event handling --------------------
 
   class EventLoop implements ActionListener {
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
       // Here you can implement the logic to advance the game by one step
+
+
       // and update the GUI.
 
       boolean gameOver = false; // TODO
@@ -106,6 +127,9 @@ public class GUITowerDefence extends JFrame {
     }
   }
 
+
+
+
   // ----------- Helper methods ---------------------
 
   // Helper method to construct a JLabel with a given image
@@ -116,8 +140,14 @@ public class GUITowerDefence extends JFrame {
   }
 
   // Just some examples, you can change them however you like.
-  private JLabel buildTowerLabel() {
-    return getIconLabel("icons/tower-icon.png");
+  private JPanel buildTowerLabel() {
+    JPanel panel = new JPanel();
+    panel.setBackground(Color.green);
+    panel.setLayout(new BorderLayout());
+
+    JLabel monsterIcon = getIconLabel("icons/tower-icon.png");
+    panel.add(monsterIcon, BorderLayout.CENTER);
+    return panel;
   }
 
   private JPanel buildMonsterPanel(int monsterHealth) {
