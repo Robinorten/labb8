@@ -54,7 +54,7 @@ public class GUITowerDefence extends JFrame {
     JPanel mainPanel = new JPanel();
     mainPanel.setLayout(new GridLayout(levelHeight, levelWidth));
     this.add(mainPanel);
-
+    //hejhej
     for (int row = 0; row < levelHeight; row++) {
       for (int col = 0; col < levelWidth; col++) {
         JPanel positionPanel = new JPanel();
