@@ -1,4 +1,3 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
@@ -6,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.*;
-import javax.swing.ImageIcon;
 
 /**
  * Basic GUI for very basic "Tower Defence" game
@@ -26,12 +24,13 @@ public class GUITowerDefence extends JFrame {
 
   // A representation of the complete game
   private TowerDefenceLevel level;
+  public Monster benny = new Monster(TowerDefenceLevel.buildDefaultLevel());
 
   public static void main(String[] args) {
 
     // Change this to try out different levels
-    TowerDefenceLevel level = TowerDefenceLevel.buildAdvancedLevel();
-    Monster Benny = new Monster();
+    TowerDefenceLevel level = TowerDefenceLevel.buildDefaultLevel();
+
 
 
     // Create the GUI and set it to be visible
@@ -39,7 +38,6 @@ public class GUITowerDefence extends JFrame {
     gui.setVisible(true);
 
   }
-
 
   public GUITowerDefence(TowerDefenceLevel level) {
 
@@ -57,7 +55,7 @@ public class GUITowerDefence extends JFrame {
     JPanel mainPanel = new JPanel();
     mainPanel.setLayout(new GridLayout(levelHeight, levelWidth));
     this.add(mainPanel);
-    //JButton myButton = new JButton("My Button");
+
     for (int row = 0; row < levelHeight; row++) {
       for (int col = 0; col < levelWidth; col++) {
         JPanel positionPanel = new JPanel();
@@ -83,7 +81,6 @@ public class GUITowerDefence extends JFrame {
         }
         mainPanel.add(positionPanel);
 
-
         // Add the panel to the 'positionPanels' map so we can access it
         // later (with positionPanels.get(position)).
         Position position = level.getPosition(row, col);
@@ -104,14 +101,14 @@ public class GUITowerDefence extends JFrame {
   // ---------- Event handling --------------------
 
   class EventLoop implements ActionListener {
-
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
       // Here you can implement the logic to advance the game by one step
-
-
       // and update the GUI.
+      benny.move();
+      System.out.println(Integer.toString(benny.currentPos.row)+Integer.toString(benny.currentPos.col));
+
 
       boolean gameOver = false; // TODO
 
@@ -126,9 +123,6 @@ public class GUITowerDefence extends JFrame {
 
     }
   }
-
-
-
 
   // ----------- Helper methods ---------------------
 
