@@ -90,6 +90,7 @@ public class GUITowerDefence extends JFrame {
 
 
 
+
     // Start the timer and set it to call the event loop each second
     EventLoop loop = new EventLoop();
     timer = new Timer(SPEED, loop);
@@ -107,7 +108,11 @@ public class GUITowerDefence extends JFrame {
       // Here you can implement the logic to advance the game by one step
       // and update the GUI.
       benny.move();
+      Tower tower = new Tower(level.getPosition(1,5));
       System.out.println(Integer.toString(benny.currentPos.row)+Integer.toString(benny.currentPos.col));
+
+
+
 
 
       boolean gameOver = false; // TODO
@@ -148,6 +153,7 @@ public class GUITowerDefence extends JFrame {
     JPanel panel = new JPanel();
     panel.setBackground(Color.WHITE);
     panel.setLayout(new BorderLayout());
+    panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
     JLabel monsterIcon = getIconLabel("icons/monster10.gif");
     panel.add(monsterIcon, BorderLayout.CENTER);
