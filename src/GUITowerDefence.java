@@ -23,7 +23,7 @@ public class GUITowerDefence extends JFrame {
   private static final int PAUSE = 3000;
 
   // A representation of the complete game
-  private TowerDefenceLevel level;
+  public TowerDefenceLevel level;
   public Monster benny = new Monster(TowerDefenceLevel.buildGridLevel());
 
   public static void main(String[] args) {
