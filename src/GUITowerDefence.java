@@ -63,9 +63,24 @@ public class GUITowerDefence extends JFrame {
         if(level.checkPassable(row, col)){
           positionPanel.setBackground(Color.WHITE);
         } else {
+          JButton myButton = new JButton();
           positionPanel.setBackground(Color.GREEN);
+          positionPanel.add(myButton);
+          myButton.setPreferredSize(new Dimension(100, 90));
+          myButton.setOpaque(false);
+          myButton.setContentAreaFilled(false);
+          myButton.setBorderPainted(false);
+          myButton.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            positionPanel.add(buildTowerLabel());
+            positionPanel.remove(myButton);
+
+          }
+          });
+
         }
         mainPanel.add(positionPanel);
+
         // Add the panel to the 'positionPanels' map so we can access it
         // later (with positionPanels.get(position)).
         Position position = level.getPosition(row, col);
@@ -119,8 +134,14 @@ public class GUITowerDefence extends JFrame {
   }
 
   // Just some examples, you can change them however you like.
-  private JLabel buildTowerLabel() {
-    return getIconLabel("icons/tower-icon.png");
+  private JPanel buildTowerLabel() {
+    JPanel panel = new JPanel();
+    panel.setBackground(Color.green);
+    panel.setLayout(new BorderLayout());
+
+    JLabel monsterIcon = getIconLabel("icons/tower-icon.png");
+    panel.add(monsterIcon, BorderLayout.CENTER);
+    return panel;
   }
 
   private JPanel buildMonsterPanel(int monsterHealth) {
