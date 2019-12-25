@@ -5,14 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
 
 /**
  * Basic GUI for very basic "Tower Defence" game
  */
-public class GUITowerDefence extends JFrame {
+public class GUITowerDefence<List> extends JFrame {
 
   // A map that assigns a panel to each position in the game
-  private final Map<Position, JPanel> positionPanels = new HashMap<>();
+  private Map<Position, JPanel> positionPanels = new HashMap<>();
 
   // The size of each position panel
   private static final int POSITION_SIZE = 100;
@@ -25,6 +26,8 @@ public class GUITowerDefence extends JFrame {
   // A representation of the complete game
   public TowerDefenceLevel level;
   public Monster benny = new Monster(TowerDefenceLevel.buildGridLevel());
+  public Tower[] towers = new Tower[0];
+  java.util.List<Position> towerList = new ArrayList<Position>();
 
   public static void main(String[] args) {
 
@@ -70,10 +73,16 @@ public class GUITowerDefence extends JFrame {
           myButton.setOpaque(false);
           myButton.setContentAreaFilled(false);
           myButton.setBorderPainted(false);
+          int finalRow = row;
+          int finalCol = col;
           myButton.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
             positionPanel.add(buildTowerLabel());
             positionPanel.remove(myButton);
+            int i = towers.length;
+            increaseSize();
+            towers[i] = new Tower(level.getPosition(finalRow, finalCol));
+
 
           }
           });
@@ -108,8 +117,15 @@ public class GUITowerDefence extends JFrame {
       // Here you can implement the logic to advance the game by one step
       // and update the GUI.
       benny.move();
-      Tower tower = new Tower(level.getPosition(1,5));
-      System.out.println(Integer.toString(benny.currentPos.row)+Integer.toString(benny.currentPos.col));
+      JPanel monster = buildMonsterPanel(10);
+      for(int i = 0; i < towers.length; i++){
+          java.util.List<Position> list = new ArrayList<Position>(Arrays.asList(towers[i].reach));
+          if (list.contains(benny.currentPos)){
+            benny.healthPoints= benny.healthPoints-towers[i].attack();
+        }
+      }
+      System.out.println(benny.healthPoints);
+
 
 
 
@@ -132,6 +148,13 @@ public class GUITowerDefence extends JFrame {
   // ----------- Helper methods ---------------------
 
   // Helper method to construct a JLabel with a given image
+  private void increaseSize(){
+    Tower[] temp = new Tower[towers.length+1];
+    for (int i = 0; i < towers.length; i++){
+      temp[i] = towers[i];
+    }
+    towers = temp;
+  }
   private JLabel getIconLabel(String fileName) {
     URL url = this.getClass().getResource(fileName);
     ImageIcon ii = new ImageIcon(url);
