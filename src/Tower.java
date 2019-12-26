@@ -5,7 +5,7 @@ public class Tower {
     Position[] reach = new Position[8];
     Position position;
     public Tower(Position position){
-        this.firePower = 1;
+        this.firePower = 2;
         this.position = position;
         reach[0] = new Position(position.row-1,position.col-1);
         reach[1] = new Position(position.row,position.col-1);
