@@ -126,7 +126,7 @@ public class GUITowerDefence<List> extends JFrame {
       // Here you can implement the logic to advance the game by one step
       // and update the GUI.
 
-      benny.move();
+
 
       for(int i = 0; i < towers.length; i++){
           java.util.List<Position> list = new ArrayList<Position>(Arrays.asList(towers[i].reach));
@@ -136,6 +136,7 @@ public class GUITowerDefence<List> extends JFrame {
       }
       System.out.println(benny.healthPoints);
       updateUI();
+      benny.move();
 
 
 
@@ -151,8 +152,11 @@ public class GUITowerDefence<List> extends JFrame {
         gameOver = true;
       }
 
-      if (gameOver) {
-        setTitle("Game over!");
+      if (gameOver && benny.healthPoints == 0) {
+        setTitle("Game over! You win!");
+        timer.stop();
+      } else if (gameOver){
+        setTitle("Game over! You Lose!");
         timer.stop();
       }
       // These two commands are necessary to properly
