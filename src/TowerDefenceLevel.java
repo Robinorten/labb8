@@ -1,5 +1,5 @@
 public class TowerDefenceLevel {
-    public int height,width,startRow,startCol,targetRow,targetCol;
+    public int height,width,startRow,startCol,targetRow,targetCol,firePower;
     private Position currentPos;
     private boolean[][] passable;
 
@@ -15,7 +15,7 @@ public class TowerDefenceLevel {
     //   (when the monster reaches this position, the player loses the game).
     public TowerDefenceLevel(int height, int width, boolean[][] passable,
                              int startRow, int startCol,
-                             int targetRow, int targetCol) {
+                             int targetRow, int targetCol,int firePower) {
         this.height = height;
         this.width = width;
         this.passable = passable;
@@ -23,6 +23,7 @@ public class TowerDefenceLevel {
         this.startRow = startRow;
         this.targetCol = targetCol;
         this.targetRow = targetRow;
+        this.firePower = firePower;
     }
 
     public int getHeight() {
@@ -46,7 +47,7 @@ public class TowerDefenceLevel {
                 { true  , true  , true  },
                 { false , false , false }
         };
-        return new TowerDefenceLevel(3,3,passable,1,0,1,2);
+        return new TowerDefenceLevel(3,3,passable,1,0,1,2,5);
     }
 
     public static TowerDefenceLevel buildDefaultLevel() {
@@ -55,7 +56,7 @@ public class TowerDefenceLevel {
                 { true  , true  , true , false, true,  false , false , false },
                 { false , false , false, false, true,  true  , true  , true  }
         };
-        return new TowerDefenceLevel(3,8,passable,1,0,2,7);
+        return new TowerDefenceLevel(3,8,passable,1,0,2,7,2);
     }
 
     public static TowerDefenceLevel buildAdvancedLevel() {
@@ -64,7 +65,7 @@ public class TowerDefenceLevel {
                 { true  , true , false , true , true  , true , false , true , true  },
                 { false , true , true  , true , false , true , true  , true , false }
         };
-        return new TowerDefenceLevel(3,9,passable,1,0,1,8);
+        return new TowerDefenceLevel(3,9,passable,1,0,1,8,2);
     }
 
     public static TowerDefenceLevel buildSpiralLevel() {
@@ -79,7 +80,7 @@ public class TowerDefenceLevel {
                 { true , false , false , false , false , false , false , false , true  },
                 { true , true  , true  , true  , true  , true  , true  , true  , true  }
         };
-        return new TowerDefenceLevel(9,9,passable,0,0,4,4);
+        return new TowerDefenceLevel(9,9,passable,0,0,4,4,2);
     }
 
     public static TowerDefenceLevel buildGridLevel() {
@@ -94,7 +95,7 @@ public class TowerDefenceLevel {
                 { true , false , true , false , true , false , true , false , true },
                 { true , true  , true , true  , true , true  , true , true  , true }
         };
-        return new TowerDefenceLevel(9,9,passable,0,0,8,8);
+        return new TowerDefenceLevel(9,9,passable,0,0,8,8,2);
     }
 
 }

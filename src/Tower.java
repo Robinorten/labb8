@@ -4,9 +4,9 @@ public class Tower {
     int firePower;
     Position[] reach = new Position[8];
     Position position;
-    public Tower(Position position){
-        this.firePower = 2;
+    public Tower(Position position, int firePower){
         this.position = position;
+        this.firePower = firePower;
         reach[0] = new Position(position.row-1,position.col-1);
         reach[1] = new Position(position.row,position.col-1);
         reach[2] = new Position(position.row-1,position.col);
@@ -15,6 +15,8 @@ public class Tower {
         reach[5] = new Position(position.row+1,position.col+1);
         reach[6] = new Position(position.row+1,position.col);
         reach[7] = new Position(position.row,position.col+1);
+
+
 
     }
     public int attack(){
