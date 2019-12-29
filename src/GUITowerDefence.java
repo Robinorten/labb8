@@ -33,7 +33,7 @@ public class GUITowerDefence<List> extends JFrame {
   public static void main(String[] args) {
 
     // Change this to try out different levels
-    TowerDefenceLevel level = TowerDefenceLevel.buildSpiralLevel();
+    TowerDefenceLevel level = TowerDefenceLevel.buildDefaultLevel();
 
 
 
@@ -73,6 +73,9 @@ public class GUITowerDefence<List> extends JFrame {
         positionPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         if(level.checkPassable(row, col)){
           positionPanel.setBackground(Color.WHITE);
+          if (benny.currentPos.equals(new Position(row,col))){
+            positionPanel.add(buildMonsterPanel(benny.healthPoints));
+          }
         } else {
           JButton myButton = new JButton();
           positionPanel.setBackground(Color.GREEN);
@@ -135,8 +138,8 @@ public class GUITowerDefence<List> extends JFrame {
         }
       }
       System.out.println(benny.healthPoints);
-      updateUI();
       benny.move();
+      updateUI();
 
 
 
@@ -174,7 +177,7 @@ public class GUITowerDefence<List> extends JFrame {
     Position k = panels[benny.currentPos.row][benny.currentPos.col];
     Position h = panels[benny.previousPos.row][benny.previousPos.col];
     positionPanels.get(h).removeAll();
-    positionPanels.get(k).add(buildMonsterPanel(benny.healthPoints));
+    positionPanels.get(k).add(buildMonsterPanel(benny.healthPoints),BorderLayout.CENTER);
   }
   private void increaseSize(){
     Tower[] temp = new Tower[towers.length+1];
